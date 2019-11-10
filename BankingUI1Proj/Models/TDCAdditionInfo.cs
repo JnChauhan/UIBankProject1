@@ -6,20 +6,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BankingUI1Proj.Models
 {
-    public class TermDepositAcc : Account
+    public class TDCAdditionInfo
     {
+        [Key]
+        public int Id { get; set; }
+
         [Display(Name = "Maturity Date")]
-        [Required (ErrorMessage = "Unable to Assign Maturity Date")]
         [DataType(DataType.Date)]
         public DateTime MaturityDate { get; set; }
 
-        [Required]
-        [Display(Name = "Interest Rate")]
-        public double InterestRate { get; set; }
-
         [Display(Name = "Accrued Interest")]
         public double AccruedInterest { get; set; }
-        
-        public IEnumerable<TdcTransact> TdcTransaction { get; set; }
+
+        [Required]
+        public int AccountNum { get; set; }
+        public Account Account { get; set; }
     }
 }

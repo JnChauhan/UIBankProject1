@@ -4,14 +4,16 @@ using BankingUI1Proj.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BankingUI1Proj.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191108205606_CustomerControllerFistAftewards")]
+    partial class CustomerControllerFistAftewards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,7 +117,7 @@ namespace BankingUI1Proj.Data.Migrations
 
                     b.HasIndex("CheckingAccAccountNum");
 
-                    b.ToTable("BizTransacts");
+                    b.ToTable("BizTransact");
                 });
 
             modelBuilder.Entity("BankingUI1Proj.Models.BusinessAcc", b =>
@@ -147,7 +149,7 @@ namespace BankingUI1Proj.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("BusinessAccs");
+                    b.ToTable("BusinessAcc");
                 });
 
             modelBuilder.Entity("BankingUI1Proj.Models.CheckingAcc", b =>
@@ -179,7 +181,7 @@ namespace BankingUI1Proj.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("CheckingAccs");
+                    b.ToTable("CheckingAcc");
                 });
 
             modelBuilder.Entity("BankingUI1Proj.Models.ChkTransact", b =>
@@ -213,7 +215,7 @@ namespace BankingUI1Proj.Data.Migrations
 
                     b.HasIndex("ChkAccAccountNum");
 
-                    b.ToTable("ChkTransacts");
+                    b.ToTable("ChkTransact");
                 });
 
             modelBuilder.Entity("BankingUI1Proj.Models.Customer", b =>
@@ -257,7 +259,7 @@ namespace BankingUI1Proj.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("BankingUI1Proj.Models.TdcTransact", b =>
@@ -289,7 +291,7 @@ namespace BankingUI1Proj.Data.Migrations
 
                     b.HasIndex("TdcAccAccountNum");
 
-                    b.ToTable("TdcTransacts");
+                    b.ToTable("TdcTransact");
                 });
 
             modelBuilder.Entity("BankingUI1Proj.Models.TermDepositAcc", b =>
@@ -327,7 +329,7 @@ namespace BankingUI1Proj.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("TermDepositAccs");
+                    b.ToTable("TermDepositAcc");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

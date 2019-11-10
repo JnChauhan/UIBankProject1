@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BankingUI1Proj.Models;
 
+
 namespace BankingUI1Proj.Controllers
 {
     public class HomeController : Controller
@@ -23,11 +24,12 @@ namespace BankingUI1Proj.Controllers
             return View();
         }
 
+        /*
         public IActionResult Privacy()
         {
             return View();
         }
-
+        */
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

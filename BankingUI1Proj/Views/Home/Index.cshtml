@@ -1,8 +1,32 @@
-﻿@{
+﻿@*
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+*@
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (User.Identity.Name != null)
+{
+    //@Session[""] = "";
+    <div style="float: right; width: 400px; border: 1px solid black; margin-top: 5.5em; background-color: #e6ffff">
+        <h3 style="padding: 50px 50px 15px 50px;">Go To Your Accounts! </h3>
+        <p style="padding: 0px 50px 25px 50px">
+            <a class="btn btn-primary" style="color:white;" asp-area="" asp-controller="Customer" asp-action="Index"><strong>My Accounts</strong></a>
+
+        </p>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-3">Welcome to Customer's Bank</h1>
+        <br /><br />
+        <h2 class="display-4">Please Login and Manage your Account!</h2>
+        <!-- <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> -->
+    </div>
+}
+
+

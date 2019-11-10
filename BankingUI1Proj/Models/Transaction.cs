@@ -6,10 +6,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BankingUI1Proj.Models
 {
-    public abstract class Transaction
+    public class Transaction
     {
         [Key]
         public int Id { get; set; }
+        
+        public DateTime TransactionDate { get; set; }
+
+        [Display(Name = "Type of Transaction")]
         public string TransactionType { get; set; }
         
         [Required]
@@ -18,7 +22,10 @@ namespace BankingUI1Proj.Models
         [Required]
         public double NewBalance { get; set; }
 
+        public string Comments { get; set; }
+
         [Required]
-        public int AccountId { get; set; }
+        public int AccountNum { get; set; }
+        public Account Account { get; set; }
     }
 }

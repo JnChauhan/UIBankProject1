@@ -36,6 +36,9 @@ namespace BankingUI1Proj
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            /*services.AddDbContext<MyDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));*/
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

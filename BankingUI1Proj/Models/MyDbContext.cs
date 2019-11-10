@@ -1,33 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using BankingUI1Proj.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-//using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore; 
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace BankingUI1Proj.Data
+namespace BankingUI1Proj.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class MyDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) 
+        public MyDbContext(DbContextOptions<MyDbContext> context)
+            : base(context)
         {
+
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"data source=.\SQLEXPRESS;initial catalog=UiBankingDB;integrated security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"data source=.\\SQLEXPRESS;initial catalog=UiBankingDB;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Account>().HasIndex(u => u.AccName).IsUnique();
             builder.Entity<Loan>().HasIndex(u => u.LoanName).IsUnique();
         }
-
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Account> Accounts { get; set; }
