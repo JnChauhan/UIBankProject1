@@ -1,0 +1,31 @@
+﻿
+@model BankingUI1Proj.Models.Account
+@{
+    ViewData["Title"] = "Withdraw";
+}
+
+<h2>Withdraw</h2>
+<h3>@Model.AccName</h3>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Withdraw">
+            <div class="form-group">
+                <label value="Deposit" class="control-label">Withdrawing Amount</label>
+                $<input asp-for="Balance" class="form-control" type="number" min="0" step="0.01" />
+            </div>
+            <input asp-for="AccountNum" class="form-control" type="hidden" value="@Model.AccountNum">
+            <br />
+
+            <div class="form-group">
+                <input type="submit" value="Withdraw" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Go Back</a>
+</div>

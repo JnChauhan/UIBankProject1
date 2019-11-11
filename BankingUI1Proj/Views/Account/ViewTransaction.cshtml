@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BankingUI1Proj.Models.Transaction>
+
+@{
+    ViewData["Title"] = "ViewTransaction";
+}
+
+<h1>Transactions</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount) ($)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewBalance) ($)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNum)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+        @foreach (var item in Model)
+        {
+
+            if (i <= 10)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => (item.TransactionDate).Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NewBalance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountNum)
+                    </td>
+                </tr>
+                i++;
+            }
+        }
+    </tbody>
+</table>
+<div>
+    <strong><a asp-action="Index">Go Back</a></strong>
+</div>

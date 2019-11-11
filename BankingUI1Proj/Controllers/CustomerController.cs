@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BankingUI1Proj.Data;
 using BankingUI1Proj.BusinessLayer;
+using BankingUI1Proj.Models;
+
 
 namespace BankingUI1Proj.Controllers
 {
@@ -25,7 +27,13 @@ namespace BankingUI1Proj.Controllers
             string userEmail = User.Identity.Name;
             if (userEmail != null)
             {
-                customerExist = _custBl.ExistCustomer(userEmail);   
+                ApplicationUserBL appUser = new ApplicationUserBL();
+                string userId = appUser.GetUserId(userEmail);
+                customerExist = _custBl.ExistCustomer(userId);
+                if(customerExist)
+                {
+                    ViewBag.Fullname = _custBl.GetCustFullName(userId);
+                }
             }
             ViewBag.ExistCust = customerExist;
             return View();
@@ -40,18 +48,19 @@ namespace BankingUI1Proj.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            bool customerExist = false;
+            bool customerExist;
             string userId;
             string userEmail = User.Identity.Name;
             string returnUrl = Url.Content("~/Customer/Index");
             if (userEmail != null)
             {
                 //var customer = new CustomerBL();
-                customerExist = _custBl.ExistCustomer(userEmail);
+                ApplicationUserBL appUser = new ApplicationUserBL();
+                userId = appUser.GetUserId(userEmail);
+
+                customerExist = _custBl.ExistCustomer(userId);
                 if (!customerExist)
                 {
-                    ApplicationUserBL appUser = new ApplicationUserBL();
-                    userId = appUser.GetUserId(userEmail);
                     ViewBag.AppUserId = userId;
                     return View();
                 }
@@ -70,14 +79,15 @@ namespace BankingUI1Proj.Controllers
         // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Customer cust)
         {
             try
             {
-                _custBl.AddNewCustomer(collection["Firstname"], collection["Lastname"], collection["Address"], collection["City"], collection["State"], 
-                    Convert.ToInt32(collection["Zipcode"]), Convert.ToInt32(collection["SocialSecurity"]), collection["ApplicationUserId"]);
+                //add a new customer
+                _custBl.AddNewCustomer(cust.Firstname, cust.Lastname, cust.Address, cust.City, cust.State,
+                    cust.Zipcode, cust.SocialSecurity, cust.ApplicationUserId);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -86,49 +96,46 @@ namespace BankingUI1Proj.Controllers
         }
 
         // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View();
+            bool customerExist;
+            string userId;
+            string userEmail = User.Identity.Name;
+            string returnUrl = Url.Content("~/Customer/Index");
+            if (userEmail != null)
+            {
+                //var customer = new CustomerBL();
+                ApplicationUserBL appUser = new ApplicationUserBL();
+                userId = appUser.GetUserId(userEmail);
+
+                customerExist = _custBl.ExistCustomer(userId);
+                if (customerExist)
+                {
+                    var customer = _custBl.GetCustomer(_custBl.GetCustId(userId));
+                    return View(customer);
+                }
+            }
+            return LocalRedirect(returnUrl);           
+            //return View(customer);*/
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Customer cust)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                // Edit record of existing customer
+                _custBl.EditCustomer(id, cust.Firstname, cust.Lastname, cust.Address, cust.City, cust.State,
+                    cust.Zipcode, cust.SocialSecurity, cust.ApplicationUserId);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
-        // GET: Customer/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Customer/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

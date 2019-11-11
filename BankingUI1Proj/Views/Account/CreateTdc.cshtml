@@ -1,0 +1,55 @@
+﻿@model BankingUI1Proj.Models.Account
+
+@{
+    ViewData["Title"] = "CreateTdc";
+}
+
+<h1>Term Deposit Certificate</h1>
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateTdc">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AccName" class="control-label"></label>
+                <input asp-for="AccName" class="form-control" />
+                <span asp-validation-for="AccName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountType" class="control-label"></label>
+                <select asp-for="AccountType" id="accType" class="form-control">
+                    <option selected="selected" value="TDC">TDC</option>
+                    <!--<option value="TDC">Term Deposit Certificate</option>-->
+                </select>
+                <span asp-validation-for="AccountType" class="text-danger"></span>
+            </div>
+            <div>
+                <label id="Months" class="control-label">Term Period</label>
+                <select id="Months" class="form-control">
+                    <option selected ="selected" value="6">6</option>
+                    <option value="12">12</option>
+                    <option value="24">24</option>
+                </select>
+            </div>
+            <div>
+                <label id="Amount" class="control-label">TDC Amount</label>
+                <select asp-for="Balance" id="balance" class="form-control">
+                    <option selected="selected" value="1000">1000</option>
+                    <option value="2500">2500</option>
+                    <option value="5000">5000</option>
+                </select>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Go Back</a>
+</div>
+

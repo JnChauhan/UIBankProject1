@@ -1,0 +1,83 @@
+﻿@model BankingUI1Proj.Models.Account
+
+@{
+    ViewData["Title"] = "Close";
+}
+
+@if(ViewBag.AccountClosed)
+{
+    <h2>
+        Account Closed!
+    </h2>
+    <div>
+        Details of Closed account
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AccName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AccName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AccountType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AccountType)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InterestRate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InterestRate)
+            </dd>
+        </dl>
+    </div>
+}
+else
+{
+    <h2>Cannot Close Account</h2>
+    <div>
+        <br />
+        Still have available balance
+        
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AccName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AccName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AccountType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AccountType)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InterestRate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InterestRate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Balance)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Balance)
+            </dd>
+            @if (Model.AccountType == "TDC")
+            {
+                <dt class="col-sm-2">
+                    Maturity Date
+                </dt>
+                <dd class="col-sm-10">
+                    @ViewBag.MaturityDate
+                </dd>
+            }
+        </dl>
+    </div>
+}
+<br />
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

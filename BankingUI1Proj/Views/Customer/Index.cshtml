@@ -8,7 +8,18 @@
 {
     @if (ViewBag.ExistCust)
     {
-
+        <h3>
+            Welcome @ViewBag.Fullname
+        </h3>
+        <div style="margin-top: 30px;">
+            <strong>To View or Edit your Personal Information <a asp-action="Edit">Click here</a></strong>
+        </div>
+        <div style="float: left; width: 550px; border: 1px solid black; margin-top: 5.5em; background-color: #F9F6F5">
+            <h3 style="padding: 50px 50px 15px 50px;">Manage OR View your Accounts! </h3>
+            <p style="padding: 10px 50px 25px 50px;">
+                <a class="btn btn-primary" style="color:white; width: 350px" asp-area="" asp-controller="Account" asp-action="Index"><strong>My Accounts</strong></a>
+            </p>
+        </div>
     }
     else
     {

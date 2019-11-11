@@ -21,12 +21,14 @@ namespace BankingUI1Proj.Data
                 optionsBuilder.UseSqlServer(@"data source=.\SQLEXPRESS;initial catalog=UiBankingDB;integrated security=True;MultipleActiveResultSets=True;");
             }
         }
-
+        
+        /*
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Account>().HasIndex(u => u.AccName).IsUnique();
             builder.Entity<Loan>().HasIndex(u => u.LoanName).IsUnique();
         }
+        */
 
 
         public DbSet<Customer> Customers { get; set; }

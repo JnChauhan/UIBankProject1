@@ -24,20 +24,22 @@ namespace BankingUI1Proj.Models
         [Required(ErrorMessage = "City is required")]
         public string City { get; set; }
 
+        [Required(ErrorMessage = "Required")]
         [StringLength(2)]
         public string State { get; set; }
 
-        [StringLength(5)]
-        [Required(ErrorMessage = "Zipcode is required & Must be in a Valid Format")]
-        public int Zipcode { get; set; }
+        [RegularExpression("^[0-9]{5}$", ErrorMessage = "Must be Valid Zipcode")]
+        [Required(ErrorMessage = "Required | Must be in a Valid Format")]
+        public string Zipcode { get; set; }
 
-        [StringLength(9)]
+        
+        [RegularExpression("^[0-9]{9}$", ErrorMessage = "Must be Valid Numbers")]
         [Display(Name = "Social Security #")]
-        [Required(ErrorMessage = "Please input your Social Security #")]
-        public int SocialSecurity { get; set; }
-
+        [Required(ErrorMessage = "Required | Must be in a Valid Format")]
+        public string SocialSecurity { get; set; }
+        //@Scripts.Render("~/bundles/jqueryval")
         public string ApplicationUserId { get; set; }
-        //[ForeignKey("UserId")]
+
         public virtual ApplicationUser ApplicationUser { get; set; }
         public ICollection<Account> Accounts { get; set; }
         public ICollection<Loan> Loans { get; set; }

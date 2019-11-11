@@ -1,0 +1,80 @@
+﻿@model BankingUI1Proj.Models.Account
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create New</h1>
+
+<h4>Account</h4>
+<!--
+<script type="text/javascript">
+
+    function myFunction() {
+        var x = document.getElementById("accType").value;
+        var y = document.getElementById("MaturityMonth").value;
+        var months = [6, 12, 24];
+        if (x == "TDC") {
+            var newOption; 
+            for (var i = 0; i < months.length; i++) {
+                newOption = document.createElement("option");
+                newOption.value = months[i];  // assumes option string and value are the same 
+                newOption.text = months[i];
+                // add the new option 
+                try {
+                    y.add(newOption);  // this will fail in DOM browsers but is needed for IE 
+                }
+                catch (e) {
+                    y.appendChild(newOption);
+                }
+            }
+        }
+    }
+</script>
+-->
+
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AccName" class="control-label"></label>
+                <input asp-for="AccName" class="form-control" />
+                <span asp-validation-for="AccName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountType" class="control-label"></label>
+                <select asp-for="AccountType" id="accType" class="form-control" onchange="myFunction()">
+                    <option selected="selected" value="Business">Business Account</option>
+                    <option value="Checking">Checkings Account</option>
+                    <!--<option value="TDC">Term Deposit Certificate</option>-->
+                </select>
+                <span asp-validation-for="AccountType" class="text-danger"></span>
+            </div>
+            <!--
+            <div>
+                <label for="MaturityMonth" class="control-label">Term Duration for Deposit Certificate</label>
+                <select id="MaturityMonth" class="form-control">
+
+                </select>
+            </div>
+            -->
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-area="" asp-controller="Account" asp-action="CreateTdc"><strong>Create a Term Deposit Certificate</strong></a>
+</div>
+<div>
+    <a asp-action="Index">Go Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

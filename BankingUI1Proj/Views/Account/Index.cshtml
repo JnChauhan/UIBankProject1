@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BankingUI1Proj.Models.Account>
+
+@{
+    ViewData["Title"] = "My accounts";
+}
+
+<h1>@ViewBag.Fullname</h1>
+<br />
+<br />
+<h3>My Accounts List</h3>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@if (!ViewBag.NoOpenAccount)
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterestRate)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterestRate)
+            </td>
+            <td>
+                <a asp-action="Deposit" asp-route-id="@item.AccountNum">Deposit</a> |
+                <a asp-action="Withdraw" asp-route-id="@item.AccountNum">Withdraw</a> |
+                <a asp-action="ViewTransaction" asp-route-id="@item.AccountNum">Transactions</a> |
+                <a asp-action="Close" asp-route-id="@item.AccountNum">Close</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}
+else
+{
+    <div>
+        Cannot find any Open account
+    </div>
+}

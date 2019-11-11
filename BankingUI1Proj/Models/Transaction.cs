@@ -10,7 +10,8 @@ namespace BankingUI1Proj.Models
     {
         [Key]
         public int Id { get; set; }
-        
+
+        //[DataType(DataType.Date)]
         public DateTime TransactionDate { get; set; }
 
         [Display(Name = "Type of Transaction")]
